@@ -1,7 +1,11 @@
 ### Uso do wlroots para teste com Docker
 
 - bash (criação): 
-```docker exec -it wlroots-test-container bash```
+```
+docker-compose up --build -d
+```
 
 - bash (execução): 
-```docker exec -it wlroots-test-container bash```
+```
+docker exec -it wlroots-test-container bash
+```
