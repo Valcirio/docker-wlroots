@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  wlroots-test:
+    image: archlinux:latest
+    container_name: wlroots-test-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./wlroots:/wlroots # Monta o código fonte do wlroots no container
+    ports:
+      - "5900:5900" # Exemplo: se você precisar de acesso VNC ou similar
+    environment:
+      - DISPLAY=:0 # Define a variável DISPLAY, se necessário para GUI
+      - XDG_RUNTIME_DIR=/tmp # Define XDG_RUNTIME_DIR para alguns aplicativos Wayland
+    privileged: true # Necessário para acessar dispositivos como /dev/dri e carregar módulos do kernel
+    cap_add:
+      - SYS_ADMIN # Permite certas operações de sistema, como modprobe
+      - NET_ADMIN # Pode ser útil para configurações de rede, se necessário
+    tty: true # Mantém o container em execução para que você possa se conectar a ele
+    stdin_open: true # Permite interatividade via `docker attach` ou `docker exec`
